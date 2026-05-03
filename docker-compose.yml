@@ -5,8 +5,8 @@ services:
     restart: always
     networks:
       - proxy
-    env_file:
-      - .env
+    environment:
+      - PORT=3011
     volumes:
       - app-data:/usr/src/app/data
     labels:
