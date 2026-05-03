@@ -19,10 +19,10 @@ const AUTO_START_DELAY_MS = 3000; // seconds after last connect before auto-star
 
 // Player info
 const players = {
-    1: { id: 1, color: 0xff4757, cssColor: '#ff4757', name: 'RED', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-1'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
-    2: { id: 2, color: 0x1e90ff, cssColor: '#1e90ff', name: 'BLUE', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-2'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
-    3: { id: 3, color: 0xffa502, cssColor: '#ffa502', name: 'ORANGE', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-3'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
-    4: { id: 4, color: 0x2ed573, cssColor: '#2ed573', name: 'GREEN', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-4'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false }
+    1: { id: 1, color: 0x2ed573, cssColor: '#2ed573', name: 'GREEN', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-1'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
+    2: { id: 2, color: 0xffa502, cssColor: '#ffa502', name: 'ORANGE', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-2'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
+    3: { id: 3, color: 0x1e90ff, cssColor: '#1e90ff', name: 'BLUE', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-3'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false },
+    4: { id: 4, color: 0xff4757, cssColor: '#ff4757', name: 'RED', connected: false, participating: false, details: null, x: 0, y: 0, angle: 0, speed: 0, ui: document.getElementById('slot-4'), obj: null, lap: 0, finished: false, finishTime: 0, inputVx: 0, inputVy: 0, inputActive: false, trail: [], passedCheckpoint: false }
 };
 
 // Form / match state
@@ -85,10 +85,10 @@ let maskContext = null;
 //  PHASER FUNCTIONS
 // ─────────────────────────────────────────────
 function preload() {
-    this.load.image('car_1', 'assets/red.png');
-    this.load.image('car_2', 'assets/blue.png');
-    this.load.image('car_3', 'assets/orange.png');
-    this.load.image('car_4', 'assets/green.png');
+    this.load.image('car_1', 'assets/green.png');
+    this.load.image('car_2', 'assets/orange.png');
+    this.load.image('car_3', 'assets/blue.png');
+    this.load.image('car_4', 'assets/red.png');
     this.load.svg('track_base', 'assets/road.svg', { width: 1280, height: 720 });
     this.load.image('track_ground', 'assets/ARGH LOGO TRACK.png');
     this.load.image('track_road', 'assets/just the road.png');
