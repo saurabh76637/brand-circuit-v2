@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Circuit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container"></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-layer">
+
+        <!-- Waiting Room -->
+        <div id="waiting-room">
+            <img src="assets/Udaan Logo Final.png" alt="Udaan" class="welcome-logo" />
+            <p class="subtitle">MOVE JOYSTICK TO CONNECT</p>
+            <div class="player-grid">
+                <div class="player-slot" id="slot-1">
+                    <h2 style="color: #ff4757">P1</h2>
+                    <p class="status">Waiting...</p>
+                </div>
+                <div class="player-slot" id="slot-2">
+                    <h2 style="color: #1e90ff">P2</h2>
+                    <p class="status">Waiting...</p>
+                </div>
+                <div class="player-slot" id="slot-3">
+                    <h2 style="color: #ffa502">P3</h2>
+                    <p class="status">Waiting...</p>
+                </div>
+                <div class="player-slot" id="slot-4">
+                    <h2 style="color: #2ed573">P4</h2>
+                    <p class="status">Waiting...</p>
+                </div>
+            </div>
+            <button id="start-btn" class="hidden">START RACE</button>
+            <div class="auto-start-setting">
+                <label for="auto-start-toggle">
+                    <input type="checkbox" id="auto-start-toggle" />
+                    Auto-start when players connect
+                </label>
+            </div>
+        </div>
+
+        <!-- Player Details Form -->
+        <div id="player-details-form" class="hidden">
+            <div class="form-card">
+                <h2 id="form-player-label">Player 1 Details</h2>
+                <p class="form-progress" id="form-progress">Player 1 of 1</p>
+                <div class="form-field">
+                    <label for="form-name">Name</label>
+                    <input type="text" id="form-name" autocomplete="off" placeholder="Enter name" />
+                </div>
+                <div class="form-field">
+                    <label for="form-zone">Zone</label>
+                    <input type="text" id="form-zone" autocomplete="off" placeholder="e.g. North" />
+                </div>
+                <div class="form-field">
+                    <label for="form-channel">Channel</label>
+                    <input type="text" id="form-channel" autocomplete="off" placeholder="e.g. Retail" />
+                </div>
+                <div class="form-buttons">
+                    <button id="form-prev-btn" type="button">Previous</button>
+                    <button id="form-next-btn" type="button">Next</button>
+                    <button id="form-submit-btn" type="button">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countdown -->
+        <div id="countdown" class="hidden">3</div>
+
+        <!-- Leaderboard -->
+        <div id="leaderboard" class="hidden">
+            <h1>RACE OVER</h1>
+            <div id="leaderboard-list"></div>
+            <button id="restart-btn">PLAY AGAIN</button>
+        </div>
+
+        <!-- HUD -->
+        <div id="hud" class="hidden"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="gamepad.js"></script>
+    <script src="game.js?v=16"></script>
+</body>
+
+</html>
