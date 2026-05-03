@@ -78,9 +78,13 @@ app.get('/api/results.csv', (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3011;
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running! Access game at http://localhost:${PORT}/game/`);
-    console.log(`Download all results as CSV: http://localhost:${PORT}/api/results.csv`);
+    console.log('\x1b[32m%s\x1b[0m', '🚀 Brand Circuit V2 Server is running!');
+    console.log('\n----------------------------------------');
+    console.log(`🏠 Local:    http://localhost:${PORT}/game/`);
+    console.log(`🌐 Live:     https://brandcircuitv2.2209.in/game/`);
+    console.log(`📊 CSV:      https://brandcircuitv2.2209.in/api/results.csv`);
+    console.log('----------------------------------------\n');
 });

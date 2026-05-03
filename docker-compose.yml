@@ -1,0 +1,30 @@
+services:
+  app:
+    image: ghcr.io/saurabh76637/brand-circuit-v2:latest
+    container_name: brand-circuit-v2-app
+    restart: always
+    networks:
+      - proxy
+    env_file:
+      - .env
+    volumes:
+      - app-data:/usr/src/app/data
+    labels:
+      - "traefik.enable=true"
+      # HTTPS Router
+      - "traefik.http.routers.brandcircuitv2.rule=Host(`brandcircuitv2.2209.in`)"
+      - "traefik.http.routers.brandcircuitv2.entrypoints=websecure"
+      - "traefik.http.routers.brandcircuitv2.tls.certresolver=letsencrypt"
+      - "traefik.http.services.brandcircuitv2.loadbalancer.server.port=3011"
+      # HTTP Router (Redirect to HTTPS)
+      - "traefik.http.routers.brandcircuitv2-http.rule=Host(`brandcircuitv2.2209.in`)"
+      - "traefik.http.routers.brandcircuitv2-http.entrypoints=web"
+      - "traefik.http.routers.brandcircuitv2-http.middlewares=brandcircuitv2-redirect"
+      - "traefik.http.middlewares.brandcircuitv2-redirect.redirectscheme.scheme=https"
+
+volumes:
+  app-data:
+
+networks:
+  proxy:
+    external: true
