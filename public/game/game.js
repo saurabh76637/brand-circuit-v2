@@ -39,6 +39,8 @@ const MAX_SPEED = 10;
 const ACCEL = 0.25;
 const FRICTION = 0.96;
 const REQUIRED_LAPS = 1;
+const RACE_TIMEOUT_MS = 90000; // 90s race time limit — unfinished cars get DNF'd by progress
+let raceTimeoutId = null;
 
 // ─────────────────────────────────────────────
 //  S-CURVE TRACK DEFINITION
@@ -275,6 +277,7 @@ function update() {
         } else p.trail = [];
     }
     if (activeRacersCount > 0 && finishers.length === getParticipatingCount()) {
+        if (raceTimeoutId) { clearTimeout(raceTimeoutId); raceTimeoutId = null; }
         gameState = STATE.FINISHED;
         showLeaderboard();
     }
@@ -284,6 +287,32 @@ function getParticipatingCount() {
     let n = 0;
     for (let i = 1; i <= 4; i++) if (players[i].participating) n++;
     return n;
+}
+
+function handleRaceTimeout() {
+    if (gameState !== STATE.RACING) return;
+    raceTimeoutId = null;
+
+    // Rank unfinished participating players by track progress (laps + position-on-lap),
+    // then push them into finishers so the leaderboard renders them after real finishers.
+    const unfinished = [];
+    for (let i = 1; i <= 4; i++) {
+        const p = players[i];
+        if (!p.participating || p.finished) continue;
+        const closest = getClosestTrackIndex(p.x, p.y);
+        p._progress = p.lap + (closest.index / NUM_SAMPLES);
+        p.finishTime = RACE_TIMEOUT_MS;
+        p.dnf = true;
+        unfinished.push(p);
+    }
+    unfinished.sort((a, b) => b._progress - a._progress);
+    for (const p of unfinished) {
+        finishers.push(p);
+        if (p.obj) p.obj.setAlpha(0.4);
+    }
+
+    gameState = STATE.FINISHED;
+    showLeaderboard();
 }
 
 function renderResultsTable() {
@@ -634,6 +663,7 @@ function beginRaceCountdown() {
             gameState = STATE.RACING;
             startTime = Date.now();
             startRaceMusic();
+            raceTimeoutId = setTimeout(handleRaceTimeout, RACE_TIMEOUT_MS);
         }
     }, 1000);
 }
